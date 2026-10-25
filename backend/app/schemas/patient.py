@@ -40,6 +40,7 @@ class PatientProfile(BaseModel):
 
     liver_function_abnormal: bool = False
     thyroid_function_abnormal: bool = False
+    thyroid_tests_overdue: bool = False
 
     # Relevant history
     long_qt_syndrome: bool = False
