@@ -1,13 +1,68 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MedGuard educational antiarrhythmic medication safety prototype using synthetic patient profiles.">
     <title>MedGuard | Medication Safety</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>MedGuard</h1>
-    <p>Antiarrhythmic Medication Safety & Monitoring Application</p>
-    <p>Educational prototype using synthetic patient data only.</p>
+    <header>
+        <h1 id="app-title">MedGuard</h1>
+        <p>Antiarrhythmic Medication Safety &amp; Monitoring</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Medication Safety Assessment</h2>
+            <p>Enter a synthetic patient profile to demonstrate draft safety rules.</p>
+
+            <form id="assessment-form">
+                <label for="medicine">Medication</label>
+                <select id="medicine" name="medicine" required>
+                    <option value="">Select medication</option>
+                    <option value="sotalol">Sotalol</option>
+                    <option value="flecainide">Flecainide</option>
+                    <option value="amiodarone">Amiodarone</option>
+                </select>
+
+                <label for="age">Age</label>
+                <input id="age" name="age" type="number" min="0" max="120">
+
+                <label for="heart-rate">Heart rate (bpm)</label>
+                <input id="heart-rate" name="heart_rate" type="number" min="0" max="300">
+
+                <label for="qtc">QTc (ms)</label>
+                <input id="qtc" name="qtc_ms" type="number" min="0" max="1000" step="any">
+
+                <label for="qrs">QRS duration (ms)</label>
+                <input id="qrs" name="qrs_ms" type="number" min="0" max="500" step="any">
+
+                <label for="potassium">Potassium (mmol/L)</label>
+                <input id="potassium" name="potassium" type="number" min="0" max="15" step="any">
+
+                <label for="magnesium">Magnesium (mmol/L)</label>
+                <input id="magnesium" name="magnesium" type="number" min="0" max="10" step="any">
+
+                <label for="crcl">Creatinine clearance (mL/min)</label>
+                <input id="crcl" name="crcl" type="number" min="0" max="300" step="any">
+
+                <button type="submit">Assess synthetic profile</button>
+            </form>
+
+            <div id="assessment-result" role="status" aria-live="polite"></div>
+        </section>
+
+        <p class="disclaimer">
+            Educational prototype only. Uses draft rules and synthetic data.
+            Not for clinical decision-making.
+        </p>
+    </main>
+
+    <script src="/js/validation.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>
