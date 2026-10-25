@@ -1,68 +1,256 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="MedGuard educational antiarrhythmic medication safety prototype using synthetic patient profiles.">
+    <meta name="theme-color" content="#f3faf4">
     <title>MedGuard | Medication Safety</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header>
-        <h1 id="app-title">MedGuard</h1>
-        <p>Antiarrhythmic Medication Safety &amp; Monitoring</p>
-    </header>
+    <div class="app-shell">
 
-    <main>
-        <section class="card">
-            <h2>Medication Safety Assessment</h2>
-            <p>Enter a synthetic patient profile to demonstrate draft safety rules.</p>
+        <aside class="sidebar">
+            <a class="brand" href="#dashboard" aria-label="MedGuard home">
+                <span class="brand-icon">+</span>
+                <span>MedGuard</span>
+            </a>
 
-            <form id="assessment-form">
-                <label for="medicine">Medication</label>
-                <select id="medicine" name="medicine" required>
-                    <option value="">Select medication</option>
-                    <option value="sotalol">Sotalol</option>
-                    <option value="flecainide">Flecainide</option>
-                    <option value="amiodarone">Amiodarone</option>
-                </select>
+            <p class="sidebar-label">WORKSPACE</p>
 
-                <label for="age">Age</label>
-                <input id="age" name="age" type="number" min="0" max="120">
+            <nav class="sidebar-nav" aria-label="Main navigation">
+                <a class="nav-link active" href="#dashboard">
+                    <span class="nav-icon">⌂</span>
+                    Dashboard
+                </a>
+                <a class="nav-link" href="#assessment-form">
+                    <span class="nav-icon">＋</span>
+                    Patient assessment
+                </a>
+                <a class="nav-link" href="#assessment-result">
+                    <span class="nav-icon">✓</span>
+                    Safety results
+                </a>
+            </nav>
 
-                <label for="heart-rate">Heart rate (bpm)</label>
-                <input id="heart-rate" name="heart_rate" type="number" min="0" max="300">
+            <p class="sidebar-label system-label">INFORMATION</p>
 
-                <label for="qtc">QTc (ms)</label>
-                <input id="qtc" name="qtc_ms" type="number" min="0" max="1000" step="any">
+            <a class="nav-link" href="#about">
+                <span class="nav-icon">ⓘ</span>
+                About MedGuard
+            </a>
 
-                <label for="qrs">QRS duration (ms)</label>
-                <input id="qrs" name="qrs_ms" type="number" min="0" max="500" step="any">
+            <div class="sidebar-footer">
+                <span class="status-dot"></span>
+                Educational research prototype
+                <small>Version 1.0</small>
+            </div>
+        </aside>
 
-                <label for="potassium">Potassium (mmol/L)</label>
-                <input id="potassium" name="potassium" type="number" min="0" max="15" step="any">
+        <div class="main-area">
+            <header class="topbar">
+                <div>
+                    <span class="topbar-title">Medication safety workspace</span>
+                    <span class="topbar-subtitle">Synthetic patient assessment</span>
+                </div>
+                <span class="environment-tag">
+                    <span class="status-dot"></span>
+                    Research mode
+                </span>
+            </header>
 
-                <label for="magnesium">Magnesium (mmol/L)</label>
-                <input id="magnesium" name="magnesium" type="number" min="0" max="10" step="any">
+            <main id="dashboard" class="dashboard">
+                <section class="page-heading">
+                    <div>
+                        <p class="eyebrow">CLINICAL SAFETY · RESEARCH PROTOTYPE</p>
+                        <h1 id="app-title">Medication Safety Dashboard</h1>
+                        <p class="page-description">
+                            Assess synthetic patient profiles against MedGuard's
+                            draft medication safety rules.
+                        </p>
+                    </div>
+                    <div class="heading-mark" aria-hidden="true">✚</div>
+                </section>
 
-                <label for="crcl">Creatinine clearance (mL/min)</label>
-                <input id="crcl" name="crcl" type="number" min="0" max="300" step="any">
+                <section class="notice-banner" aria-label="Important information">
+                    <div class="notice-icon">i</div>
+                    <div>
+                        <strong>Educational use only</strong>
+                        <p>
+                            This prototype uses synthetic data and has not been
+                            clinically validated. It must not guide real treatment.
+                        </p>
+                    </div>
+                </section>
 
-                <button type="submit">Assess synthetic profile</button>
-            </form>
+                <div class="dashboard-grid">
+                    <section class="card assessment-card" aria-labelledby="assessment-heading">
+                        <div class="card-heading">
+                            <div>
+                                <p class="section-kicker">01 / INPUT</p>
+                                <h2 id="assessment-heading">Patient assessment</h2>
+                                <p class="muted">
+                                    Enter measurements for a synthetic patient.
+                                </p>
+                            </div>
+                            <span class="card-icon" aria-hidden="true">＋</span>
+                        </div>
 
-            <div id="assessment-result" role="status" aria-live="polite"></div>
-        </section>
+                        <form id="assessment-form">
+                            <div class="form-section">
+                                <h3>Medication details</h3>
 
-        <p class="disclaimer">
-            Educational prototype only. Uses draft rules and synthetic data.
-            Not for clinical decision-making.
-        </p>
-    </main>
+                                <div class="field">
+                                    <label for="medicine">Medication <span class="required">*</span></label>
+                                    <select id="medicine" name="medicine" required>
+                                        <option value="">Select medication</option>
+                                        <option value="sotalol">Sotalol</option>
+                                        <option value="flecainide">Flecainide</option>
+                                        <option value="amiodarone">Amiodarone</option>
+                                    </select>
+                                    <small>Choose one of the three supported medicines.</small>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="age">Age (years)</label>
+                                        <input id="age" name="age" type="number"
+                                            min="0" max="120" placeholder="e.g. 65">
+                                    </div>
+                                    <div class="field">
+                                        <label for="heart-rate">Heart rate (bpm)</label>
+                                        <input id="heart-rate" name="heart_rate"
+                                            type="number" min="0" max="300"
+                                            placeholder="e.g. 72">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Cardiac measurements</h3>
+
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="qtc">QTc interval (ms)</label>
+                                        <input id="qtc" name="qtc_ms" type="number"
+                                            min="0" max="1000" step="any"
+                                            placeholder="e.g. 420">
+                                    </div>
+                                    <div class="field">
+                                        <label for="qrs">QRS duration (ms)</label>
+                                        <input id="qrs" name="qrs_ms" type="number"
+                                            min="0" max="500" step="any"
+                                            placeholder="e.g. 100">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Renal function & electrolytes</h3>
+
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="crcl">Creatinine clearance</label>
+                                        <div class="input-with-unit">
+                                            <input id="crcl" name="crcl" type="number"
+                                                min="0" max="300" step="any"
+                                                placeholder="e.g. 90">
+                                            <span>mL/min</span>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="potassium">Potassium</label>
+                                        <div class="input-with-unit">
+                                            <input id="potassium" name="potassium"
+                                                type="number" min="0" max="15"
+                                                step="any" placeholder="e.g. 4.0">
+                                            <span>mmol/L</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label for="magnesium">Magnesium</label>
+                                    <div class="input-with-unit">
+                                        <input id="magnesium" name="magnesium"
+                                            type="number" min="0" max="10"
+                                            step="any" placeholder="Enter value">
+                                        <span>mmol/L</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="reset" class="button button-secondary">
+                                    Reset form
+                                </button>
+                                <button type="submit" class="button button-primary">
+                                    Assess synthetic profile <span aria-hidden="true">→</span>
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <aside class="results-column">
+                        <section class="card results-card" aria-labelledby="results-heading">
+                            <div class="card-heading">
+                                <div>
+                                    <p class="section-kicker">02 / OUTPUT</p>
+                                    <h2 id="results-heading">Assessment results</h2>
+                                </div>
+                                <span class="results-symbol" aria-hidden="true">✓</span>
+                            </div>
+
+                            <div id="assessment-result" class="result-content"
+                                role="status" aria-live="polite">
+                                <div class="empty-state">
+                                    <div class="empty-icon" aria-hidden="true">⌕</div>
+                                    <h3>Ready for assessment</h3>
+                                    <p>
+                                        Complete the synthetic patient form and run
+                                        an assessment to display generated alerts here.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p class="results-footnote">
+                                Results reflect only the draft rules implemented.
+                                Missing information may prevent alerts from triggering.
+                                No alert does not mean a medicine is safe.
+                            </p>
+                        </section>
+
+                        <section id="about" class="card about-card">
+                            <p class="section-kicker">ABOUT THE PROJECT</p>
+                            <h2>About MedGuard</h2>
+                            <p>
+                                A student research prototype demonstrating a
+                                cloud-hosted medication safety rules engine using
+                                synthetic patient profiles.
+                            </p>
+                            <div class="technology-tags">
+                                <span>FastAPI</span>
+                                <span>Python</span>
+                                <span>Docker</span>
+                                <span>Azure VM</span>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+
+                <footer class="page-footer">
+                    <span>MedGuard · Medication Safety &amp; Monitoring</span>
+                    <span>Educational prototype · Synthetic data only</span>
+                </footer>
+            </main>
+        </div>
+    </div>
 
     <script src="/js/validation.js"></script>
     <script src="/js/api.js"></script>
     <script src="/js/app.js"></script>
 </body>
 </html>
+```
