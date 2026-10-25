@@ -2,6 +2,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.schemas.patient import PatientProfile
+from app.services.assessment import assess_medication
+
 app = FastAPI(
     title="MedGuard API",
     description=(
@@ -12,7 +15,6 @@ app = FastAPI(
 )
 
 # Temporary development configuration.
-# Restrict origins before deployment.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:8080"],
@@ -37,3 +39,9 @@ def api_information():
         "message": "Medication safety API is running",
         "data_policy": "Synthetic data only",
     }
+
+
+@app.post("/api/v1/assessments")
+def create_assessment(profile: PatientProfile):
+    """Assess a synthetic patient profile using draft rules."""
+    return assess_medication(profile)
