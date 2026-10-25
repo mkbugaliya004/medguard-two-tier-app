@@ -12,19 +12,31 @@ function validateAssessment(data) {
         errors.push("Please select a supported medicine.");
     }
 
-    if (
-        data.qtc_ms != null &&
-        (!Number.isFinite(data.qtc_ms) || data.qtc_ms < 0)
-    ) {
-        errors.push("QTc must be a valid non-negative number.");
-    }
+    const numericLimits = {
+        age: [0, 120],
+        heart_rate: [0, 300],
+        qtc_ms: [0, 1000],
+        qrs_ms: [0, 500],
+        potassium: [0, 15],
+        magnesium: [0, 10],
+        crcl: [0, 300]
+    };
 
-    if (
-        data.heart_rate != null &&
-        (!Number.isFinite(data.heart_rate) ||
-         data.heart_rate < 0)
-    ) {
-        errors.push("Heart rate must be a valid non-negative number.");
+    for (const [field, limits] of Object.entries(numericLimits)) {
+        const value = data[field];
+
+        if (value === null || value === undefined) {
+            continue;
+        }
+
+        if (
+            typeof value !== "number" ||
+            !Number.isFinite(value) ||
+            value < limits[0] ||
+            value > limits[1]
+        ) {
+            errors.push(`${field} must be between ${limits[0]} and ${limits[1]}.`);
+        }
     }
 
     return {
