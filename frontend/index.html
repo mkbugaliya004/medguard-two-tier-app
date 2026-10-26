@@ -5,16 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="MedGuard educational antiarrhythmic medication safety prototype using synthetic patient profiles.">
-    <meta name="theme-color" content="#f3faf4">
     <title>MedGuard | Medication Safety</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <div class="app-shell">
-
         <aside class="sidebar">
-            <a class="brand" href="#dashboard" aria-label="MedGuard home">
-                <span class="brand-icon">+</span>
+            <a class="brand" href="#dashboard">
+                <span class="brand-icon" aria-hidden="true">+</span>
                 <span>MedGuard</span>
             </a>
 
@@ -22,30 +20,26 @@
 
             <nav class="sidebar-nav" aria-label="Main navigation">
                 <a class="nav-link active" href="#dashboard">
-                    <span class="nav-icon">⌂</span>
-                    Dashboard
+                    <span class="nav-icon">▦</span> Safety dashboard
                 </a>
-                <a class="nav-link" href="#assessment-form">
-                    <span class="nav-icon">＋</span>
-                    Patient assessment
+                <a class="nav-link" href="#assessment">
+                    <span class="nav-icon">♡</span> Patient assessment
                 </a>
-                <a class="nav-link" href="#assessment-result">
-                    <span class="nav-icon">✓</span>
-                    Safety results
+                <a class="nav-link" href="#results">
+                    <span class="nav-icon">▤</span> Safety results
                 </a>
             </nav>
 
-            <p class="sidebar-label system-label">INFORMATION</p>
+            <p class="sidebar-label system-label">SYSTEM</p>
 
             <a class="nav-link" href="#about">
-                <span class="nav-icon">ⓘ</span>
-                About MedGuard
+                <span class="nav-icon">⚙</span> About this prototype
             </a>
 
             <div class="sidebar-footer">
                 <span class="status-dot"></span>
-                Educational research prototype
-                <small>Version 1.0</small>
+                <span>Educational prototype</span>
+                <small>Synthetic data only · Version 1.0</small>
             </div>
         </aside>
 
@@ -53,55 +47,51 @@
             <header class="topbar">
                 <div>
                     <span class="topbar-title">Medication safety workspace</span>
-                    <span class="topbar-subtitle">Synthetic patient assessment</span>
+                    <span class="topbar-subtitle">Research prototype</span>
                 </div>
                 <span class="environment-tag">
                     <span class="status-dot"></span>
-                    Research mode
+                    Synthetic data
                 </span>
             </header>
 
-            <main id="dashboard" class="dashboard">
+            <main class="dashboard" id="dashboard">
                 <section class="page-heading">
                     <div>
                         <p class="eyebrow">CLINICAL SAFETY · RESEARCH PROTOTYPE</p>
-                        <h1 id="app-title">Medication Safety Dashboard</h1>
+                        <h1>Medication Safety Dashboard</h1>
                         <p class="page-description">
-                            Assess synthetic patient profiles against MedGuard's
-                            draft medication safety rules.
+                            Assess synthetic patient profiles against the prototype's medication rules.
                         </p>
                     </div>
                     <div class="heading-mark" aria-hidden="true">✚</div>
                 </section>
 
-                <section class="notice-banner" aria-label="Important information">
-                    <div class="notice-icon">i</div>
+                <section class="notice-banner" aria-label="Educational disclaimer">
+                    <span class="notice-icon" aria-hidden="true">i</span>
                     <div>
                         <strong>Educational use only</strong>
                         <p>
-                            This prototype uses synthetic data and has not been
-                            clinically validated. It must not guide real treatment.
+                            Use synthetic data only. This prototype is not clinically validated
+                            and must not guide real patient treatment.
                         </p>
                     </div>
                 </section>
 
                 <div class="dashboard-grid">
-                    <section class="card assessment-card" aria-labelledby="assessment-heading">
+                    <section class="card" id="assessment">
                         <div class="card-heading">
                             <div>
                                 <p class="section-kicker">01 / INPUT</p>
-                                <h2 id="assessment-heading">Patient assessment</h2>
-                                <p class="muted">
-                                    Enter measurements for a synthetic patient.
-                                </p>
+                                <h2>Patient assessment</h2>
+                                <p class="muted">Enter a synthetic profile for rule-based review.</p>
                             </div>
                             <span class="card-icon" aria-hidden="true">＋</span>
                         </div>
 
                         <form id="assessment-form">
                             <div class="form-section">
-                                <h3>Medication details</h3>
-
+                                <h3>MEDICATION DETAILS</h3>
                                 <div class="field">
                                     <label for="medicine">Medication <span class="required">*</span></label>
                                     <select id="medicine" name="medicine" required>
@@ -110,139 +100,204 @@
                                         <option value="flecainide">Flecainide</option>
                                         <option value="amiodarone">Amiodarone</option>
                                     </select>
-                                    <small>Choose one of the three supported medicines.</small>
+                                    <small>Select one of the three supported medicines.</small>
                                 </div>
-
                                 <div class="form-row">
                                     <div class="field">
                                         <label for="age">Age (years)</label>
-                                        <input id="age" name="age" type="number"
-                                            min="0" max="120" placeholder="e.g. 65">
+                                        <input id="age" name="age" type="number" min="0" max="120" placeholder="e.g. 65">
                                     </div>
                                     <div class="field">
-                                        <label for="heart-rate">Heart rate (bpm)</label>
-                                        <input id="heart-rate" name="heart_rate"
-                                            type="number" min="0" max="300"
-                                            placeholder="e.g. 72">
+                                        <label for="dose">Dose (mg)</label>
+                                        <input id="dose" name="dose_mg" type="number" min="0" step="any" placeholder="Enter prescribed dose">
                                     </div>
+                                </div>
+                                <div class="field">
+                                    <label for="diagnosis">Cardiac diagnosis</label>
+                                    <input id="diagnosis" name="cardiac_diagnosis" type="text" maxlength="200" placeholder="e.g. Atrial fibrillation">
                                 </div>
                             </div>
 
                             <div class="form-section">
-                                <h3>Cardiac measurements</h3>
-
+                                <h3>PATIENT MEASUREMENTS</h3>
                                 <div class="form-row">
                                     <div class="field">
                                         <label for="qtc">QTc interval (ms)</label>
-                                        <input id="qtc" name="qtc_ms" type="number"
-                                            min="0" max="1000" step="any"
-                                            placeholder="e.g. 420">
+                                        <input id="qtc" name="qtc_ms" type="number" min="0" max="1000" step="any" placeholder="e.g. 520">
                                     </div>
                                     <div class="field">
-                                        <label for="qrs">QRS duration (ms)</label>
-                                        <input id="qrs" name="qrs_ms" type="number"
-                                            min="0" max="500" step="any"
-                                            placeholder="e.g. 100">
+                                        <label for="heart-rate">Heart rate (bpm)</label>
+                                        <input id="heart-rate" name="heart_rate" type="number" min="0" max="300" placeholder="e.g. 72">
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="form-section">
-                                <h3>Renal function & electrolytes</h3>
-
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="qrs">QRS duration (ms)</label>
+                                        <input id="qrs" name="qrs_ms" type="number" min="0" max="500" step="any" placeholder="e.g. 130">
+                                    </div>
+                                    <div class="field">
+                                        <label for="baseline-qrs">Baseline QRS (ms)</label>
+                                        <input id="baseline-qrs" name="baseline_qrs_ms" type="number" min="0" max="500" step="any" placeholder="e.g. 100">
+                                    </div>
+                                </div>
                                 <div class="form-row">
                                     <div class="field">
                                         <label for="crcl">Creatinine clearance</label>
                                         <div class="input-with-unit">
-                                            <input id="crcl" name="crcl" type="number"
-                                                min="0" max="300" step="any"
-                                                placeholder="e.g. 90">
+                                            <input id="crcl" name="crcl" type="number" min="0" max="300" step="any" placeholder="e.g. 85">
                                             <span>mL/min</span>
                                         </div>
                                     </div>
                                     <div class="field">
+                                        <label for="lvef">LVEF (%)</label>
+                                        <div class="input-with-unit">
+                                            <input id="lvef" name="lvef_percent" type="number" min="0" max="100" step="any" placeholder="e.g. 55">
+                                            <span>percent</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field">
                                         <label for="potassium">Potassium</label>
                                         <div class="input-with-unit">
-                                            <input id="potassium" name="potassium"
-                                                type="number" min="0" max="15"
-                                                step="any" placeholder="e.g. 4.0">
+                                            <input id="potassium" name="potassium" type="number" min="0" max="15" step="any" placeholder="Enter value">
+                                            <span>mmol/L</span>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label for="magnesium">Magnesium</label>
+                                        <div class="input-with-unit">
+                                            <input id="magnesium" name="magnesium" type="number" min="0" max="10" step="any" placeholder="Enter value">
                                             <span>mmol/L</span>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="field">
-                                    <label for="magnesium">Magnesium</label>
-                                    <div class="input-with-unit">
-                                        <input id="magnesium" name="magnesium"
-                                            type="number" min="0" max="10"
-                                            step="any" placeholder="Enter value">
-                                        <span>mmol/L</span>
+                            <div class="form-section">
+                                <h3>ADDITIONAL SYNTHETIC HISTORY</h3>
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="thyroid-overdue">Thyroid monitoring overdue?</label>
+                                        <select id="thyroid-overdue" name="thyroid_tests_overdue">
+                                            <option value="false">No / not recorded as overdue</option>
+                                            <option value="true">Yes — overdue</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="liver-abnormal">Abnormal liver function?</label>
+                                        <select id="liver-abnormal" name="liver_function_abnormal">
+                                            <option value="false">No / not recorded as abnormal</option>
+                                            <option value="true">Yes — abnormal</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="thyroid-abnormal">Abnormal thyroid function?</label>
+                                        <select id="thyroid-abnormal" name="thyroid_function_abnormal">
+                                            <option value="false">No / not recorded as abnormal</option>
+                                            <option value="true">Yes — abnormal</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="rate-limiting">Multiple rate-limiting medicines?</label>
+                                        <select id="rate-limiting" name="multiple_rate_limiting_medicines">
+                                            <option value="false">No / not recorded</option>
+                                            <option value="true">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="structural-disease">Structural heart disease?</label>
+                                        <select id="structural-disease" name="structural_heart_disease">
+                                            <option value="false">No / not recorded</option>
+                                            <option value="true">Yes</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="long-qt">Long-QT syndrome?</label>
+                                        <select id="long-qt" name="long_qt_syndrome">
+                                            <option value="false">No / not recorded</option>
+                                            <option value="true">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="qt-interaction">QT-prolonging interaction?</label>
+                                        <select id="qt-interaction" name="qt_prolonging_interaction">
+                                            <option value="false">No / not recorded</option>
+                                            <option value="true">Yes</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="bradycardia">Bradycardia symptoms?</label>
+                                        <select id="bradycardia" name="bradycardia_symptoms">
+                                            <option value="false">No / not recorded</option>
+                                            <option value="true">Yes</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-actions">
-                                <button type="reset" class="button button-secondary">
-                                    Reset form
-                                </button>
-                                <button type="submit" class="button button-primary">
-                                    Assess synthetic profile <span aria-hidden="true">→</span>
-                                </button>
+                                <button class="button button-secondary" type="reset">Reset form</button>
+                                <button class="button button-primary" type="submit">Run safety assessment →</button>
                             </div>
                         </form>
                     </section>
 
                     <aside class="results-column">
-                        <section class="card results-card" aria-labelledby="results-heading">
+                        <section class="card results-card" id="results">
                             <div class="card-heading">
                                 <div>
                                     <p class="section-kicker">02 / OUTPUT</p>
-                                    <h2 id="results-heading">Assessment results</h2>
+                                    <h2>Assessment results</h2>
                                 </div>
-                                <span class="results-symbol" aria-hidden="true">✓</span>
+                                <span class="results-symbol" aria-hidden="true">⌕</span>
                             </div>
 
-                            <div id="assessment-result" class="result-content"
-                                role="status" aria-live="polite">
+                            <div id="assessment-result" class="result-content" role="status" aria-live="polite">
                                 <div class="empty-state">
                                     <div class="empty-icon" aria-hidden="true">⌕</div>
                                     <h3>Ready for assessment</h3>
-                                    <p>
-                                        Complete the synthetic patient form and run
-                                        an assessment to display generated alerts here.
-                                    </p>
+                                    <p>Enter synthetic measurements and run the assessment to display rule-based alerts here.</p>
                                 </div>
                             </div>
 
                             <p class="results-footnote">
-                                Results reflect only the draft rules implemented.
-                                Missing information may prevent alerts from triggering.
+                                Results reflect only the rules currently implemented.
+                                Missing information may prevent rules from triggering.
                                 No alert does not mean a medicine is safe.
                             </p>
                         </section>
 
-                        <section id="about" class="card about-card">
-                            <p class="section-kicker">ABOUT THE PROJECT</p>
-                            <h2>About MedGuard</h2>
+                        <section class="card about-card" id="about">
+                            <p class="section-kicker">ABOUT MEDGUARD</p>
+                            <h2>Designed for safer monitoring</h2>
                             <p>
-                                A student research prototype demonstrating a
-                                cloud-hosted medication safety rules engine using
-                                synthetic patient profiles.
+                                A student research prototype demonstrating a rule-based
+                                medication safety workflow using synthetic clinical profiles.
                             </p>
                             <div class="technology-tags">
                                 <span>FastAPI</span>
                                 <span>Python</span>
                                 <span>Docker</span>
-                                <span>Azure VM</span>
+                                <span>GitHub Actions</span>
+                                <span>Synthetic data</span>
                             </div>
                         </section>
                     </aside>
                 </div>
 
                 <footer class="page-footer">
-                    <span>MedGuard · Medication Safety &amp; Monitoring</span>
-                    <span>Educational prototype · Synthetic data only</span>
+                    <span>MedGuard · Educational research prototype</span>
+                    <span>Not clinically validated · Synthetic data only</span>
                 </footer>
             </main>
         </div>
@@ -254,3 +309,7 @@
 </body>
 </html>
 ```
+
+Commit message: `Build polished MedGuard dashboard layout`.
+
+Important: This new HTML includes more fields but backend schema may not include `thyroid_tests_overdue` in current repo unless it was fixed as part of previous CI failure; the successful workflow run named “Add overdue thyroid monitoring field to patient schema” suggests it now exists. Also the frontend `app.js` must serialize select true/false strings to booleans and construct request payload matching Pydantic field names; current starter app.js likely does not yet do this. Next step after this HTML is committed: replace `frontend/js/app.js` with functional submit/reset/result-rendering code that uses `validateAssessment`, `assessMedication`, converts number/boolean values correctly, and safely renders result alerts. Also check CSS selectors align; this CSS is a full replacement matching the HTML classes.
