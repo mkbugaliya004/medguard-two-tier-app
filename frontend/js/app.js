@@ -11,18 +11,43 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
 
         const formData = new FormData(form);
-        const medicine = formData.get("medicine");
+
+        const numericFields = [
+            "age",
+            "dose_mg",
+            "heart_rate",
+            "qtc_ms",
+            "qrs_ms",
+            "baseline_qrs_ms",
+            "crcl",
+            "lvef_percent",
+            "potassium",
+            "magnesium"
+        ];
+
+        const booleanFields = [
+            "thyroid_tests_overdue",
+            "liver_function_abnormal",
+            "thyroid_function_abnormal",
+            "multiple_rate_limiting_medicines",
+            "structural_heart_disease",
+            "long_qt_syndrome",
+            "qt_prolonging_interaction",
+            "bradycardia_symptoms"
+        ];
 
         const patientData = {
-            medicine,
-            age: readNumber(formData, "age"),
-            heart_rate: readNumber(formData, "heart_rate"),
-            qtc_ms: readNumber(formData, "qtc_ms"),
-            qrs_ms: readNumber(formData, "qrs_ms"),
-            potassium: readNumber(formData, "potassium"),
-            magnesium: readNumber(formData, "magnesium"),
-            crcl: readNumber(formData, "crcl")
+            medicine: formData.get("medicine"),
+            cardiac_diagnosis: formData.get("cardiac_diagnosis") || null
         };
+
+        numericFields.forEach((field) => {
+            patientData[field] = readNumber(formData, field);
+        });
+
+        booleanFields.forEach((field) => {
+            patientData[field] = formData.get(field) === "true";
+        });
 
         const validation = validateAssessment(patientData);
 
@@ -42,7 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error(error);
         }
     });
+
+    form.addEventListener("reset", () => {
+        result.textContent = "Ready for a new synthetic assessment.";
+    });
 });
+
 
 function readNumber(formData, fieldName) {
     const value = formData.get(fieldName);
@@ -53,6 +83,7 @@ function readNumber(formData, fieldName) {
 
     return Number(value);
 }
+
 
 function displayAssessment(assessment, result) {
     result.replaceChildren();
