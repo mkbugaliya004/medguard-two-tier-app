@@ -6,5 +6,5 @@ class Base(DeclarativeBase):
     pass
 
 
-# Import models after defining Base
-from app.models.patient import Patient
+# Register models with SQLAlchemy metadata
+from app.models import Patient, Assessment
