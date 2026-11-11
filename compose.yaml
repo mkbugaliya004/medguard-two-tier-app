@@ -49,28 +49,3 @@ services:
 
 volumes:
   medguard_postgres_data:
-
-services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: medguard-backend
-    restart: unless-stopped
-    expose:
-      - "8000"
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: medguard-frontend
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt:ro
-      - ./certbot/www:/var/www/certbot:ro
-    depends_on:
-      - backend
