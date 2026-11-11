@@ -3,9 +3,13 @@ name: MedGuard Backend Tests
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - medguard-upgrade
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - medguard-upgrade
 
 jobs:
   test:
