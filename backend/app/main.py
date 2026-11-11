@@ -2,6 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.v1.endpoints.patients import router as patients_router
 from app.schemas.patient import PatientProfile
 from app.services.assessment import assess_medication
 
@@ -13,6 +14,9 @@ app = FastAPI(
     ),
     version="1.0.0",
 )
+
+# Register API routers
+app.include_router(patients_router, prefix="/api/v1")
 
 # Temporary development configuration.
 app.add_middleware(
