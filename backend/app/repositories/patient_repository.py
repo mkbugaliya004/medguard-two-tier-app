@@ -21,6 +21,25 @@ def create_patient(db: Session, profile: PatientProfile):
     return patient
 
 
+def update_patient(
+    db: Session,
+    patient_id: str,
+    profile: PatientProfile,
+):
+    patient = get_patient(db, patient_id)
+
+    if not patient:
+        return None
+
+    for field, value in profile.model_dump().items():
+        setattr(patient, field, value)
+
+    db.commit()
+    db.refresh(patient)
+
+    return patient
+
+
 def get_all_patients(db: Session, skip: int = 0, limit: int = 100):
     return (
         db.query(Patient)
