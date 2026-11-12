@@ -42,7 +42,9 @@ body {
     line-height: 1.6;
 }
 
-button, input, select {
+button,
+input,
+select {
     font: inherit;
 }
 
@@ -144,7 +146,7 @@ button {
 
 .nav-link:hover,
 .nav-link.active {
-    background: rgba(255,255,255,0.10);
+    background: rgba(255, 255, 255, 0.10);
     color: white;
 }
 
@@ -159,8 +161,8 @@ button {
 
 .system-indicator {
     align-items: center;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
     display: flex;
     gap: 11px;
@@ -283,7 +285,9 @@ button {
     margin-bottom: 8px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     color: var(--navy);
     font-family: 'Plus Jakarta Sans', sans-serif;
     line-height: 1.35;
@@ -664,7 +668,7 @@ h1 {
 .field select:focus {
     background: white;
     border-color: var(--teal);
-    box-shadow: 0 0 0 3px rgba(17,155,145,0.1);
+    box-shadow: 0 0 0 3px rgba(17, 155, 145, 0.1);
 }
 
 .field small {
@@ -867,10 +871,10 @@ h1 {
 }
 
 .directory-container .form-actions {
+    border: 0;
     justify-content: flex-start;
     margin-top: 13px;
     padding-top: 0;
-    border: 0;
 }
 
 #patient-directory-list,
@@ -910,7 +914,7 @@ h1 {
 
 #history-patient-id:focus {
     border-color: var(--teal);
-    outline: 2px solid rgba(17,155,145,0.1);
+    outline: 2px solid rgba(17, 155, 145, 0.1);
 }
 
 #assessment-history button,
@@ -946,6 +950,106 @@ h1 {
     justify-content: space-between;
     margin-top: 38px;
     padding: 20px 0 5px;
+}
+
+/* PATIENT DIRECTORY - SEARCH AND CONTROLS */
+
+.patient-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.patient-controls input {
+    background: #fbfcfd;
+    border: 1px solid #dce4eb;
+    border-radius: 7px;
+    flex: 1;
+    height: 42px;
+    min-width: 220px;
+    outline: none;
+    padding: 0 13px;
+}
+
+.patient-controls input:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(17, 155, 145, 0.1);
+}
+
+/* PATIENT DIRECTORY - PATIENT CARDS */
+
+.patient-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    min-width: 0;
+    padding: 17px;
+    transition: 0.2s ease;
+}
+
+.patient-card:hover {
+    border-color: #b6e1dc;
+    box-shadow: var(--shadow);
+}
+
+.patient-card-top {
+    align-items: center;
+    display: flex;
+    gap: 11px;
+}
+
+.patient-avatar {
+    align-items: center;
+    background: var(--teal-soft);
+    border-radius: 9px;
+    color: var(--teal-dark);
+    display: flex;
+    font-size: 20px;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
+}
+
+.patient-card h3 {
+    font-size: 13px;
+}
+
+.patient-medicine {
+    color: var(--teal-dark);
+    display: block;
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+.patient-details {
+    border-bottom: 1px solid var(--border);
+    margin: 15px 0 12px;
+    padding-bottom: 10px;
+}
+
+.patient-detail-row {
+    display: flex;
+    font-size: 10px;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 5px 0;
+}
+
+.patient-detail-row span {
+    color: var(--muted);
+}
+
+.patient-detail-row strong {
+    color: var(--text);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+    text-align: right;
+}
+
+.patient-card .button {
+    font-size: 10px;
+    width: 100%;
 }
 
 /* RESPONSIVE DESIGN */
@@ -1111,5 +1215,14 @@ h1 {
 
     .stat-card {
         padding: 15px;
+    }
+
+    .patient-controls {
+        flex-direction: column;
+    }
+
+    .patient-controls input {
+        min-width: 0;
+        width: 100%;
     }
 }
