@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
@@ -56,8 +56,8 @@ def create_patient_assessment(
 @router.get("/patient/{patient_id}")
 def get_patient_assessment_history(
     patient_id: str,
-    skip: int = 0,
-    limit: int = 100,
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=100),
     db: Session = Depends(get_db),
 ):
     patient = patient_repository.get_patient(db, patient_id)
