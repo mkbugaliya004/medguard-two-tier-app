@@ -11,6 +11,7 @@ def create_assessment(
     status: str,
     alert_count: int,
     alerts: list,
+    commit: bool = True,
 ):
     assessment = Assessment(
         patient_id=patient_id,
@@ -21,7 +22,12 @@ def create_assessment(
     )
 
     db.add(assessment)
-    db.commit()
+
+    if commit:
+        db.commit()
+    else:
+        db.flush()
+
     db.refresh(assessment)
 
     return assessment
