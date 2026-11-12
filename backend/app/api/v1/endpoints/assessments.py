@@ -19,38 +19,54 @@ def create_patient_assessment(
     profile: PatientProfile,
     db: Session = Depends(get_db),
 ):
-    patient = patient_repository.get_patient(
-        db, profile.patient_id
-    )
-
-    if patient:
-        patient_repository.update_patient(
-            db, profile.patient_id, profile
+    try:
+        patient = patient_repository.get_patient(
+            db, profile.patient_id
         )
-    else:
-        patient_repository.create_patient(db, profile)
 
-    result = assess_medication(profile)
+        if patient:
+            patient_repository.update_patient(
+                db,
+                profile.patient_id,
+                profile,
+                commit=False,
+            )
+        else:
+            patient_repository.create_patient(
+                db,
+                profile,
+                commit=False,
+            )
 
-    saved_assessment = assessment_repository.create_assessment(
-        db=db,
-        patient_id=profile.patient_id,
-        medicine=result["medicine"],
-        status=result["status"],
-        alert_count=result["alert_count"],
-        alerts=result["alerts"],
-    )
+        result = assess_medication(profile)
 
-    return {
-        "assessment_id": saved_assessment.id,
-        "patient_id": profile.patient_id,
-        "medicine": result["medicine"],
-        "status": result["status"],
-        "alert_count": result["alert_count"],
-        "alerts": result["alerts"],
-        "created_at": saved_assessment.created_at,
-        "educational_warning": result["educational_warning"],
-    }
+        saved_assessment = assessment_repository.create_assessment(
+            db=db,
+            patient_id=profile.patient_id,
+            medicine=result["medicine"],
+            status=result["status"],
+            alert_count=result["alert_count"],
+            alerts=result["alerts"],
+            commit=False,
+        )
+
+        db.commit()
+        db.refresh(saved_assessment)
+
+        return {
+            "assessment_id": saved_assessment.id,
+            "patient_id": profile.patient_id,
+            "medicine": result["medicine"],
+            "status": result["status"],
+            "alert_count": result["alert_count"],
+            "alerts": result["alerts"],
+            "created_at": saved_assessment.created_at,
+            "educational_warning": result["educational_warning"],
+        }
+
+    except Exception:
+        db.rollback()
+        raise
 
 
 @router.get("/patient/{patient_id}")
