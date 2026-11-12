@@ -129,6 +129,33 @@
                         <form id="assessment-form">
 
                             <div class="form-section">
+                                <h3>SYNTHETIC PATIENT DETAILS</h3>
+
+                                <div class="field">
+                                    <label for="patient-id">
+                                        Synthetic Patient ID
+                                        <span class="required">*</span>
+                                    </label>
+
+                                    <input
+                                        id="patient-id"
+                                        name="patient_id"
+                                        type="text"
+                                        maxlength="50"
+                                        pattern="[A-Za-z0-9_-]+"
+                                        placeholder="e.g. SYN-001"
+                                        value="SYN-001"
+                                        required
+                                    >
+
+                                    <small>
+                                        Enter a unique ID for each synthetic patient.
+                                        Use letters, numbers, hyphens or underscores.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
                                 <h3>MEDICATION DETAILS</h3>
 
                                 <div class="field">
@@ -173,6 +200,7 @@
                                             name="dose_mg"
                                             type="number"
                                             min="0"
+                                            max="5000"
                                             step="any"
                                             placeholder="Enter prescribed dose"
                                         >
@@ -387,9 +415,7 @@
                                             <option value="false">
                                                 No / not recorded as abnormal
                                             </option>
-                                            <option value="true">
-                                                Yes — abnormal
-                                            </option>
+                                            <option value="true">Yes — abnormal</option>
                                         </select>
                                     </div>
 
