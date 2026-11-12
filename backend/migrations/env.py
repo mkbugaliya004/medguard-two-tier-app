@@ -7,9 +7,12 @@ from alembic import context
 from app.core.config import DATABASE_URL
 from app.db.base import Base
 
+# Import models so SQLAlchemy registers their tables.
+from app.models.patient import Patient
+from app.models.assessment import Assessment
+
 config = context.config
 
-# Use the application's environment-based database URL
 config.set_main_option(
     "sqlalchemy.url",
     DATABASE_URL.replace("%", "%%")
