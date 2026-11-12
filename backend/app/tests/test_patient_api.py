@@ -63,3 +63,19 @@ def test_duplicate_patient_id_returns_409(client):
 
     assert first_response.status_code == 200
     assert second_response.status_code == 409
+
+
+def test_list_patients_rejects_negative_skip(client):
+    response = client.get(
+        "/api/v1/patients/?skip=-1"
+    )
+
+    assert response.status_code == 422
+
+
+def test_list_patients_rejects_limit_above_100(client):
+    response = client.get(
+        "/api/v1/patients/?limit=101"
+    )
+
+    assert response.status_code == 422
