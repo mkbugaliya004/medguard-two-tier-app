@@ -14,13 +14,18 @@ function validateAssessment(data) {
 
     const numericLimits = {
         age: [0, 120],
+        dose_mg: [0, 5000],
         heart_rate: [0, 300],
         qtc_ms: [0, 1000],
         qrs_ms: [0, 500],
+        baseline_qrs_ms: [0, 500],
+        crcl: [0, 300],
+        lvef_percent: [0, 100],
         potassium: [0, 15],
-        magnesium: [0, 10],
-        crcl: [0, 300]
+        magnesium: [0, 10]
     };
+
+    const integerFields = ["age", "heart_rate"];
 
     for (const [field, limits] of Object.entries(numericLimits)) {
         const value = data[field];
@@ -35,7 +40,18 @@ function validateAssessment(data) {
             value < limits[0] ||
             value > limits[1]
         ) {
-            errors.push(`${field} must be between ${limits[0]} and ${limits[1]}.`);
+            errors.push(
+                `${field} must be between ${limits[0]} and ${limits[1]}.`
+            );
+            continue;
+        }
+
+        if (field === "dose_mg" && value <= 0) {
+            errors.push("Dose must be greater than zero.");
+        }
+
+        if (integerFields.includes(field) && !Number.isInteger(value)) {
+            errors.push(`${field} must be a whole number.`);
         }
     }
 
