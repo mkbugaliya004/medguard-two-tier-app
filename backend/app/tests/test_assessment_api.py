@@ -1,4 +1,9 @@
 
+import pytest
+
+from app.api.v1.endpoints import assessments
+
+
 def test_assessment_is_saved_to_database(client):
     payload = {
         "patient_id": "SYN-TEST-001",
@@ -70,3 +75,34 @@ def test_assessment_history_rejects_limit_above_100(client):
     )
 
     assert response.status_code == 422
+
+
+def test_failed_assessment_rolls_back_patient_creation(
+    client,
+    monkeypatch,
+):
+    def fail_assessment(profile):
+        raise RuntimeError("Simulated assessment failure")
+
+    monkeypatch.setattr(
+        assessments,
+        "assess_medication",
+        fail_assessment,
+    )
+
+    payload = {
+        "patient_id": "SYN-ROLLBACK-001",
+        "medicine": "sotalol",
+    }
+
+    with pytest.raises(RuntimeError):
+        client.post(
+            "/api/v1/assessments/",
+            json=payload,
+        )
+
+    response = client.get(
+        "/api/v1/patients/SYN-ROLLBACK-001"
+    )
+
+    assert response.status_code == 404
