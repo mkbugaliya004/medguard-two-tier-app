@@ -11,11 +11,20 @@ def get_patient(db: Session, patient_id: str):
     ).first()
 
 
-def create_patient(db: Session, profile: PatientProfile):
+def create_patient(
+    db: Session,
+    profile: PatientProfile,
+    commit: bool = True,
+):
     patient = Patient(**profile.model_dump())
 
     db.add(patient)
-    db.commit()
+
+    if commit:
+        db.commit()
+    else:
+        db.flush()
+
     db.refresh(patient)
 
     return patient
@@ -25,6 +34,7 @@ def update_patient(
     db: Session,
     patient_id: str,
     profile: PatientProfile,
+    commit: bool = True,
 ):
     patient = get_patient(db, patient_id)
 
@@ -34,13 +44,21 @@ def update_patient(
     for field, value in profile.model_dump().items():
         setattr(patient, field, value)
 
-    db.commit()
+    if commit:
+        db.commit()
+    else:
+        db.flush()
+
     db.refresh(patient)
 
     return patient
 
 
-def get_all_patients(db: Session, skip: int = 0, limit: int = 100):
+def get_all_patients(
+    db: Session,
+    skip: int = 0,
+    limit: int = 100,
+):
     return (
         db.query(Patient)
         .offset(skip)
