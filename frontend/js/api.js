@@ -48,3 +48,20 @@ async function getPatientAssessmentHistory(patientId) {
         "Unable to retrieve patient assessment history."
     );
 }
+
+
+async function getPatients(skip = 0, limit = 100) {
+    const params = new URLSearchParams({
+        skip: String(skip),
+        limit: String(limit)
+    });
+
+    const response = await fetch(
+        `${API_BASE_URL}/patients/?${params.toString()}`
+    );
+
+    return handleApiResponse(
+        response,
+        "Unable to retrieve the patient directory."
+    );
+}
