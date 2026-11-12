@@ -54,3 +54,19 @@ def test_unknown_patient_history_returns_404(client):
     )
 
     assert response.status_code == 404
+
+
+def test_assessment_history_rejects_negative_skip(client):
+    response = client.get(
+        "/api/v1/assessments/patient/UNKNOWN-001?skip=-1"
+    )
+
+    assert response.status_code == 422
+
+
+def test_assessment_history_rejects_limit_above_100(client):
+    response = client.get(
+        "/api/v1/assessments/patient/UNKNOWN-001?limit=101"
+    )
+
+    assert response.status_code == 422
