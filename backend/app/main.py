@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.endpoints.patients import router as patients_router
 from app.api.v1.endpoints.assessments import router as assessments_router
+from app.api.v1.endpoints.ai import router as ai_router
+
 
 app = FastAPI(
     title="MedGuard API",
@@ -14,11 +16,14 @@ app = FastAPI(
     version="1.0.0",
 )
 
+
 # Register API routers
 app.include_router(patients_router, prefix="/api/v1")
 app.include_router(assessments_router, prefix="/api/v1")
+app.include_router(ai_router, prefix="/api/v1")
 
-# Temporary development configuration.
+
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:8080"],
