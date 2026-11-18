@@ -1,6 +1,3 @@
-cd ~/medguard-upgrade
-
-cat > frontend/index.html <<'EOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +36,9 @@ cat > frontend/index.html <<'EOF'
             </a>
             <a href="#history" class="nav-link">
                 <span>◷</span> Assessment history
+            </a>
+            <a href="#medguard-ai" class="nav-link">
+                <span>✦</span> MedGuard AI
             </a>
         </nav>
 
@@ -431,6 +431,50 @@ cat > frontend/index.html <<'EOF'
                 <div class="history-container"></div>
             </section>
 
+            <section class="content-section" id="medguard-ai">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">AI EDUCATIONAL ASSISTANT</p>
+                        <h2>MedGuard AI</h2>
+                        <p class="section-description">
+                            Ask medication education questions or request an explanation of your latest rule-based assessment.
+                        </p>
+                    </div>
+                    <span class="section-badge">Gemini powered</span>
+                </div>
+
+                <section class="panel ai-chat-panel" aria-label="MedGuard AI chat">
+                    <div class="ai-chat-header">
+                        <div class="ai-avatar">✦</div>
+                        <div>
+                            <h3>MedGuard AI assistant</h3>
+                            <p>Educational explanations for Sotalol, Flecainide and Amiodarone</p>
+                        </div>
+                    </div>
+                    <div id="ai-chat-messages" class="ai-chat-messages" role="log" aria-live="polite">
+                        <div class="ai-message assistant">
+                            <strong>MedGuard AI</strong>
+                            <p>Hello! Ask me about antiarrhythmic medicines, monitoring concepts or your latest assessment result.</p>
+                        </div>
+                    </div>
+                    <form id="ai-chat-form" class="ai-chat-form">
+                        <label for="ai-chat-input">Your question</label>
+                        <textarea id="ai-chat-input" rows="3" maxlength="2000"
+                            placeholder="e.g. Why is QT monitoring important with Sotalol?" required></textarea>
+                        <div class="ai-chat-actions">
+                            <label class="ai-context-option">
+                                <input id="ai-include-assessment" type="checkbox" checked>
+                                Include latest assessment (if available)
+                            </label>
+                            <button id="ai-send-button" type="submit" class="button button-primary">Send message <span>→</span></button>
+                        </div>
+                    </form>
+                    <p class="ai-chat-disclaimer">
+                        Educational prototype using synthetic data only. AI explanations are not clinical recommendations and do not change rule-based assessment results.
+                    </p>
+                </section>
+            </section>
+
             <section class="content-section about-section" id="about">
                 <p class="eyebrow">ABOUT THE PLATFORM</p>
                 <h2>Medication safety research prototype</h2>
@@ -459,6 +503,6 @@ cat > frontend/index.html <<'EOF'
 <script src="/js/api.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/patients.js"></script>
+<script src="/js/ai-chat.js"></script>
 </body>
 </html>
-EOF
