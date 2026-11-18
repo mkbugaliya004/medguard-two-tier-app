@@ -1,10 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="MedGuard medication safety research dashboard using synthetic patient profiles.">
+
     <title>MedGuard | Clinical Safety Workspace</title>
+
+    <!-- MedGuard365 custom application icons -->
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="/assets/medguard-icon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192"
+          href="/assets/medguard-icon-192.png">
+
+    <!-- Progressive Web App manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0b5ed7">
+
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -451,24 +464,31 @@
                             <p>Educational explanations for Sotalol, Flecainide and Amiodarone</p>
                         </div>
                     </div>
+
                     <div id="ai-chat-messages" class="ai-chat-messages" role="log" aria-live="polite">
                         <div class="ai-message assistant">
                             <strong>MedGuard AI</strong>
                             <p>Hello! Ask me about antiarrhythmic medicines, monitoring concepts or your latest assessment result.</p>
                         </div>
                     </div>
+
                     <form id="ai-chat-form" class="ai-chat-form">
                         <label for="ai-chat-input">Your question</label>
                         <textarea id="ai-chat-input" rows="3" maxlength="2000"
                             placeholder="e.g. Why is QT monitoring important with Sotalol?" required></textarea>
+
                         <div class="ai-chat-actions">
                             <label class="ai-context-option">
                                 <input id="ai-include-assessment" type="checkbox" checked>
                                 Include latest assessment (if available)
                             </label>
-                            <button id="ai-send-button" type="submit" class="button button-primary">Send message <span>→</span></button>
+
+                            <button id="ai-send-button" type="submit" class="button button-primary">
+                                Send message <span>→</span>
+                            </button>
                         </div>
                     </form>
+
                     <p class="ai-chat-disclaimer">
                         Educational prototype using synthetic data only. AI explanations are not clinical recommendations and do not change rule-based assessment results.
                     </p>
