@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             const assessment = await assessMedication(patientData);
+            window.medguardLatestAssessment = assessment;
 
             displayAssessment(assessment, result);
             updateLatestAssessment(assessment);
