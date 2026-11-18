@@ -65,3 +65,19 @@ async function getPatients(skip = 0, limit = 100) {
         "Unable to retrieve the patient directory."
     );
 }
+
+
+async function askMedGuardAI(message, assessment = null) {
+    const response = await fetch(`${API_BASE_URL}/ai/chat`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message, assessment })
+    });
+
+    return handleApiResponse(
+        response,
+        "Unable to get a response from MedGuard AI."
+    );
+}
