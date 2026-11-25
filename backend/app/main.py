@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.endpoints.patients import router as patients_router
 from app.api.v1.endpoints.assessments import router as assessments_router
 from app.api.v1.endpoints.ai import router as ai_router
+from app.api.v1.endpoints.auth import router as auth_router
 
 
 app = FastAPI(
@@ -21,13 +22,14 @@ app = FastAPI(
 app.include_router(patients_router, prefix="/api/v1")
 app.include_router(assessments_router, prefix="/api/v1")
 app.include_router(ai_router, prefix="/api/v1")
+app.include_router(auth_router, prefix="/api/v1")
 
 
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:8080"],
-    allow_credentials=False,
+    allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
