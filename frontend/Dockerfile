@@ -6,6 +6,7 @@ COPY index.html /usr/share/nginx/html/index.html
 
 # Copy CSS and JavaScript
 COPY css/ /usr/share/nginx/html/css/
+COPY login.html /usr/share/nginx/html/login.html
 COPY js/ /usr/share/nginx/html/js/
 
 # Copy custom MedGuard icons
