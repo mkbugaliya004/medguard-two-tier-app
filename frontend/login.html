@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142b45">
+  <title>Sign in | MedGuard365</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/medguard-icon-192.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body class="login-page">
+  <main class="login-shell">
+    <section class="login-card" aria-labelledby="login-title">
+      <a class="login-brand" href="/login">
+        <span class="login-brand-mark">M+</span>
+        <span><strong>MedGuard365</strong><small>MEDICATION SAFETY WORKSPACE</small></span>
+      </a>
+      <p class="login-eyebrow">WELCOME BACK</p>
+      <h1 id="login-title">Sign in to your workspace</h1>
+      <p class="login-intro">Enter your account details to access the MedGuard research dashboard.</p>
+      <form id="login-form">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required maxlength="80" placeholder="Enter username">
+        <label for="password">Password</label>
+        <div class="password-field">
+          <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="200" placeholder="Enter password">
+          <button type="button" id="toggle-password" aria-label="Show password">Show</button>
+        </div>
+        <p id="login-error" class="login-error" role="alert" aria-live="polite"></p>
+        <button class="button button-primary login-submit" type="submit">Sign in <span>→</span></button>
+      </form>
+      <p class="login-footnote">Educational research prototype · Synthetic data only</p>
+    </section>
+  </main>
+  <script src="/js/login.js"></script>
+</body>
+</html>
