@@ -1,0 +1,22 @@
+:root { --login-navy: #142b45; --login-teal: #119b91; }
+.login-page { min-height:100vh; background:linear-gradient(135deg,#edf3f8 0%,#f7fafc 55%,#e8f7f5 100%); }
+.login-shell { min-height:100vh; display:grid; place-items:center; padding:24px; }
+.login-card { width:min(100%,440px); background:#fff; border:1px solid #e6ebf0; border-radius:18px; padding:38px; box-shadow:0 18px 60px rgba(20,43,69,.10); }
+.login-brand { display:flex; align-items:center; gap:12px; margin-bottom:38px; }
+.login-brand-mark { width:46px; height:46px; display:grid; place-items:center; border-radius:12px; background:var(--login-navy); color:#fff; font-size:22px; font-weight:800; }
+.login-brand strong,.login-brand small { display:block; }
+.login-brand strong { color:var(--login-navy); font:800 20px 'Plus Jakarta Sans',sans-serif; letter-spacing:-.5px; }
+.login-brand small { color:#8290a1; font-size:9px; font-weight:700; letter-spacing:1px; margin-top:2px; }
+.login-eyebrow { color:var(--login-teal); font-size:10px; font-weight:800; letter-spacing:1.5px; margin-bottom:8px; }
+.login-card h1 { color:var(--login-navy); font:800 25px 'Plus Jakarta Sans',sans-serif; letter-spacing:-.7px; }
+.login-intro { color:#718096; font-size:13px; margin:9px 0 26px; }
+.login-card form > label { display:block; color:#34475b; font-size:12px; font-weight:700; margin:15px 0 7px; }
+.login-card input { width:100%; min-height:45px; border:1px solid #dce4eb; border-radius:8px; padding:11px 12px; background:#fbfcfd; color:#233449; outline:none; }
+.login-card input:focus { border-color:var(--login-teal); box-shadow:0 0 0 3px rgba(17,155,145,.12); background:#fff; }
+.password-field { position:relative; }
+.password-field input { padding-right:65px; }
+.password-field button { position:absolute; top:50%; right:11px; transform:translateY(-50%); border:0; background:transparent; color:var(--login-teal); font-size:11px; font-weight:700; cursor:pointer; }
+.login-submit { width:100%; justify-content:center; margin-top:12px; min-height:46px; }
+.login-error { min-height:18px; color:#c43d49; font-size:12px; margin-top:8px; }
+.login-footnote { border-top:1px solid #edf0f3; color:#8492a2; font-size:10px; text-align:center; margin-top:27px; padding-top:17px; }
+@media(max-width:480px) { .login-card { padding:26px 22px; } }
