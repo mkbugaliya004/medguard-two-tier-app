@@ -10,6 +10,10 @@ services:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-medguard_user}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/${POSTGRES_DB:-medguard}
       OPENAI_API_KEY: ${OPENAI_API_KEY:?Set OPENAI_API_KEY in .env}
       OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5.5}
+      MEDGUARD_ADMIN_USERNAME: ${MEDGUARD_ADMIN_USERNAME:-admin}
+      MEDGUARD_ADMIN_PASSWORD: ${MEDGUARD_ADMIN_PASSWORD:-admin1}
+      MEDGUARD_SESSION_SECRET: ${MEDGUARD_SESSION_SECRET:-local-medguard-project-session-secret}
+      COOKIE_SECURE: ${COOKIE_SECURE:-true}
     expose:
       - "8000"
     depends_on:
