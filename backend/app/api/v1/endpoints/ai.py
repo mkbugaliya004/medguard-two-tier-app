@@ -1,4 +1,3 @@
-
 from typing import Any
 
 from fastapi import APIRouter, HTTPException
@@ -20,9 +19,8 @@ class AIChatRequest(BaseModel):
 
 @router.post("/chat")
 async def chat_with_medguard_ai(request: AIChatRequest):
-
     try:
-        answer = await ask_gemini(
+        answer = await ask_openai(
             message=request.message,
             assessment=request.assessment,
         )
@@ -37,10 +35,10 @@ async def chat_with_medguard_ai(request: AIChatRequest):
         }
 
     except RuntimeError as exc:
-        raise HTTPException(status_code=503, detail=str(exc))
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
 
-    except Exception:
+    except Exception as exc:
         raise HTTPException(
             status_code=502,
-            detail="Unable to obtain an AI response."
-        )
+            detail="Unable to obtain an AI response.",
+        ) from exc
