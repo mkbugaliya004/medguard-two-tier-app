@@ -13,7 +13,7 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
 # Override these values with environment variables when needed.
 ADMIN_USERNAME = os.getenv("MEDGUARD_ADMIN_USERNAME", "admin")
 ADMIN_PASSWORD = os.getenv("MEDGUARD_ADMIN_PASSWORD", "admin1")
-SESSION_SECRET = os.getenv("MEDGUARD_SESSION_SECRET", "development-only-change-this-secret")
+SESSION_SECRET = os.getenv("MEDGUARD_SESSION_SECRET", "local-medguard-project-session-secret")
 COOKIE_NAME = "medguard_session"
 SESSION_TTL_SECONDS = 8 * 60 * 60
 
