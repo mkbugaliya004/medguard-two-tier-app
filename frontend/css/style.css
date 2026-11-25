@@ -1356,3 +1356,6 @@ h1 {
         width: 100%;
     }
 }
+
+/* Authenticated workspace controls */
+#logout-button { margin-left: 10px; font-size: 11px; padding: 8px 13px; }
